@@ -1,0 +1,7 @@
+exclude:
+  - supabase
+  - tools
+  - README.md
+  - package.json
+include:
+  - assets
