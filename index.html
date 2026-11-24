@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#12100E">
+<title>你的人生剧本卡 · 18 题测出你反复在演哪一出</title>
+<meta name="description" content="一次是遭遇，两次是巧合，三次以上就是剧本了。18 题，找到你反复在演的那一出。">
+<meta property="og:title" content="你的人生存档，是第几集">
+<meta property="og:description" content="一次是遭遇，两次是巧合，三次以上就是剧本了。">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="prog" id="prog" hidden><i id="progbar"></i></div>
+
+<div class="topbar" id="topbar" hidden>
+  <span class="brand">人 生 剧 本 鉴 定 所</span>
+  <span class="quota" id="quota"></span>
+</div>
+
+<main class="wrap">
+
+  <!-- 连接中 -->
+  <section class="screen on" id="s-load">
+    <div class="calcbox" style="padding-top:26vh">
+      <div class="spin"></div>
+      <p id="loadText">正在连接剧场…</p>
+    </div>
+  </section>
+
+  <!-- 凭证入场 -->
+  <section class="screen" id="s-gate">
+    <div class="eyebrow">凭证入场 · 18 题 · 约 3 分钟</div>
+    <h1>先验票，<br><em>再入戏</em></h1>
+    <p class="lede">这不是一个点开就能测的页面。<br>每个凭证密码可查看 3 次剧本档案，凭票入场。</p>
+
+    <div class="gate-card">
+      <div class="mark">ADMISSION CODE ／ 入 场 凭 证</div>
+      <input id="codeInput" class="code-input" type="text" inputmode="text"
+             autocomplete="off" autocapitalize="characters" spellcheck="false"
+             maxlength="20" placeholder="输入你的 8 位凭证密码">
+      <p class="hintline">凭证由发放者提供 · 不区分大小写</p>
+    </div>
+
+    <p class="err" id="gateErr"></p>
+    <button class="btn" id="redeemBtn">兑 换 凭 证</button>
+
+    <div class="gate-notes">
+      <div><b>18</b>道题 · 约 3 分钟，凭第一反应选</div>
+      <div><b>3</b>次机会 · 一个密码可以测三次</div>
+      <div><b>1</b>张长图 · 结果可保存成图片分享</div>
+    </div>
+    <p class="foot">仅作自我探索与娱乐参考，不构成心理诊断</p>
+  </section>
+
+  <!-- 封面 -->
+  <section class="screen" id="s-cover">
+    <div class="eyebrow">人生剧本鉴定 · 18 题 · 约 3 分钟</div>
+    <h1>你的人生存档<br><em>是第几集</em></h1>
+    <div class="quote-top">
+      <p>一次是遭遇，两次是巧合，<br>三次以上，就是剧本了。</p>
+      <small>这个测评不看你经历了什么，只看你反复在演哪一出</small>
+    </div>
+    <div class="lede">每个人都在一部自己没写过的剧里。你能背出台词，能预判结局，但还是会走进同一个场景。这一次，我们把你的剧本找出来。</div>
+    <div class="field">
+      <label>你现在演到第几集了（填入你的年龄）</label>
+      <input id="ageinput" type="number" inputmode="numeric" placeholder="比如 28" min="10" max="99">
+    </div>
+    <button class="btn" id="startBtn">调 取 我 的 剧 本 档 案</button>
+    <p class="foot" id="coverFoot">仅作自我探索与娱乐参考，不构成心理诊断</p>
+  </section>
+
+  <!-- 答题 -->
+  <section class="screen" id="s-quiz">
+    <div class="qmeta" id="qmeta">01 / 18</div>
+    <div class="qtext" id="qtext"></div>
+    <div class="opts" id="opts"></div>
+    <div class="qfoot">
+      <button class="backlink" id="backBtn">← 上一题</button>
+      <div class="dotnav" id="dotnav"></div>
+    </div>
+  </section>
+
+  <!-- 计算 -->
+  <section class="screen" id="s-calc">
+    <div class="calcbox">
+      <div class="spin"></div>
+      <p>正在调取你的剧本档案…</p>
+      <small id="calclog">比对剧情模式</small>
+    </div>
+  </section>
+
+  <!-- 结果 -->
+  <section class="screen" id="s-result">
+    <div class="shared-banner" id="sharedBanner" hidden></div>
+
+    <div id="shot">
+      <div class="ticket">
+        <div class="lab">你 的 人 生 剧 本 卡</div>
+        <h2 id="pname"></h2>
+        <div class="genre" id="pgenre"></div>
+        <div class="dashed"></div>
+        <div class="ep" id="pep"></div>
+        <div class="trow"><span class="k">角色</span><span class="val" id="prole"></span></div>
+        <div class="trow"><span class="k">评分</span><span class="score"><span id="pscore"></span><span> / 10</span></span></div>
+        <div class="trow"><span class="k">评价人数</span><span class="val" id="raters">1（你自己）</span></div>
+        <div class="dmb" id="pdmb"></div>
+      </div>
+
+      <div class="sec">
+        <div class="kicker">这一集的剧情</div>
+        <div class="role" id="prole2"></div>
+        <p id="pstory"></p>
+      </div>
+
+      <div class="danmu">
+        <div class="kicker">观众弹幕</div>
+        <div id="dmbox"></div>
+      </div>
+
+      <div class="goldquote"><p id="pquote"></p></div>
+
+      <div class="curse">
+        <div class="kicker">这个剧本的代价</div>
+        <p id="pcurse"></p>
+      </div>
+
+      <div class="turn">
+        <div class="kicker">下一集可以这样演</div>
+        <p id="pturn"></p>
+        <span class="note" id="pnote"></span>
+      </div>
+
+      <div class="shot-tail" id="shotTail">
+        人生剧本鉴定所 · 18 题叙事测评
+        <span class="sig" id="shotSig"></span>
+      </div>
+    </div>
+
+    <div class="actions" id="actions">
+      <p class="share-tip" id="shareTip">截图这张剧集卡，发给那个和你演同一部剧的人</p>
+      <div class="row">
+        <button class="btn" id="saveBtn">保存为图片</button>
+        <button class="btn ghost" id="copyBtn">复制链接</button>
+      </div>
+      <button class="btn ghost mini" id="againBtn">再测一次</button>
+      <p class="foot" id="resultFoot">本测评基于叙事身份理论、依恋理论与防御机制的通俗化改编，<br>仅供自我探索与娱乐参考，不构成心理诊断。</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- 长图预览 -->
+<div class="modal" id="modal">
+  <div class="mhead">
+    <span id="modalTitle">长图已生成</span>
+    <button class="mclose" id="modalClose" aria-label="关闭">×</button>
+  </div>
+  <div class="mbody" id="modalBody"></div>
+  <div class="mfoot">
+    <p id="modalHint">长按图片可保存到相册</p>
+    <button class="btn" id="downloadBtn">下载图片</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="assets/vendor/supabase.js"></script>
+<script src="assets/vendor/html2canvas.min.js"></script>
+<script src="assets/config.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+node_modules/
+_test.html
+_t2.html
+_t3.html
+_t4.html
+_visual.html
+_reg.html
+.DS_Store
+*.log
+supabase/codes-backup.txt
