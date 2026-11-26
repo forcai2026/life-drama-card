@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#12100E">
+<meta name="robots" content="noindex,nofollow">
+<title>管理后台 · 人生剧本卡</title>
+<link rel="stylesheet" href="assets/admin.css">
+</head>
+<body>
+
+<!-- ================= 登录 ================= -->
+<div class="login-wrap" id="vLogin">
+  <div class="login-card">
+    <div class="eyebrow">人生剧本卡 · 管理后台</div>
+    <h1>管理员登录</h1>
+    <div class="field">
+      <label for="pwd">管理员密码</label>
+      <input id="pwd" type="password" autocomplete="current-password" placeholder="输入密码">
+    </div>
+    <p class="err" id="loginErr"></p>
+    <button class="btn-gold" id="loginBtn">登 录</button>
+    <p class="foot">连续 5 次输错将锁定 5 分钟</p>
+  </div>
+</div>
+
+<!-- ================= 主界面 ================= -->
+<div class="app" id="vMain" hidden>
+
+  <header class="top">
+    <div class="brand">人生剧本卡 <i>·</i> 后台</div>
+    <div class="top-act">
+      <button class="ghost sm" id="pwdBtn">改密码</button>
+      <button class="ghost sm" id="logoutBtn">退出</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- 统计 -->
+    <section class="stats" id="stats">
+      <div class="stat"><b id="stCodes">–</b><span>密码数</span></div>
+      <div class="stat"><b id="stRemain">–</b><span>剩余次数</span></div>
+      <div class="stat"><b id="stUsed">–</b><span>已用次数</span></div>
+      <div class="stat"><b id="stResults">–</b><span>已测人数</span></div>
+    </section>
+
+    <!-- 生成 -->
+    <section class="panel">
+      <div class="panel-hd"><span>批量生成密码</span></div>
+      <div class="gen-row">
+        <label class="gen-item">数量
+          <input id="genCount" type="number" inputmode="numeric" value="10" min="1" max="200">
+        </label>
+        <label class="gen-item">每个可用次数
+          <input id="genUses" type="number" inputmode="numeric" value="3" min="1" max="99">
+        </label>
+        <button class="btn-gold" id="genBtn">生 成</button>
+      </div>
+      <p class="tip">生成后立刻显示，可一键复制或导出 CSV。密码只出现这一次，记得保存。</p>
+    </section>
+
+    <!-- 列表 -->
+    <section class="panel">
+      <div class="panel-hd">
+        <span>密码列表 <b class="cnt" id="cntLabel"></b></span>
+        <div class="tools">
+          <input id="search" type="search" placeholder="搜索密码 / 备注">
+          <button class="ghost sm" id="exportBtn">导出 CSV</button>
+          <button class="ghost sm" id="refreshBtn">刷新</button>
+        </div>
+      </div>
+      <div class="list" id="list"><p class="empty">正在加载…</p></div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ================= 生成结果弹层 ================= -->
+<div class="modal" id="mdNew" hidden>
+  <div class="modal-card">
+    <div class="modal-hd">
+      <span id="mdNewTitle">本次生成</span>
+      <button class="x" id="mdNewClose" aria-label="关闭">&times;</button>
+    </div>
+    <div class="codes" id="newCodes"></div>
+    <div class="modal-ft">
+      <button class="ghost" id="copyAllBtn">复制全部</button>
+      <button class="btn-gold" id="exportNewBtn">导出这批 CSV</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 改密码弹层 ================= -->
+<div class="modal" id="mdPwd" hidden>
+  <div class="modal-card narrow">
+    <div class="modal-hd">
+      <span>修改管理员密码</span>
+      <button class="x" id="mdPwdClose" aria-label="关闭">&times;</button>
+    </div>
+    <div class="field"><label for="oldPwd">原密码</label><input id="oldPwd" type="password" autocomplete="current-password"></div>
+    <div class="field"><label for="newPwd">新密码（至少 8 位）</label><input id="newPwd" type="password" autocomplete="new-password"></div>
+    <div class="field"><label for="newPwd2">再输一次</label><input id="newPwd2" type="password" autocomplete="new-password"></div>
+    <p class="err" id="pwdErr"></p>
+    <div class="modal-ft">
+      <button class="ghost" id="pwdCancel">取消</button>
+      <button class="btn-gold" id="pwdSave">保存</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="assets/vendor/supabase.js"></script>
+<script src="assets/config.js"></script>
+<script src="assets/admin.js"></script>
+</body>
+</html>
